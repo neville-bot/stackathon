@@ -2,22 +2,21 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
 
-class App extends React() {
-  constructor(props){
-    super(props)
-    this.state = { trendingStories: []}
-  }
-  // const [stories, setStories] = useState({ trendingStories: [] });
-  // useEffect(() => {
-  //   async function fetchData() {
-  //   }
-  //   fetchData();
-  // }, []);
-  componentDidMount(){
+function App() {
+  const [stories, setStories] = useState([])
+  
+callAPI() {
+  fetch("http://localhost:90000/testAPI")
+  .then(res => res.text())
+  .then(res => {let trendingStories = res})
+}
 
-  }
+  useEffect(() => {
+      callAPI()
+  }, []);
+  
 
-  render(){ stories ? (
+   return (stories)  ? ( 
     <div className="App">
       <header className="App-header">
         <h3>Custom Location</h3>
@@ -89,7 +88,7 @@ class App extends React() {
     </div>
   ) : (
     <div>Error Loading page</div>
-  );}
+  );
 }
 
 export default App;
