@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import axios from "axios";
 
 function App() {
   const [stories, setStories] = useState([])
   
-callAPI() {
-  fetch("http://localhost:90000/testAPI")
-  .then(res => res.text())
-  .then(res => {let trendingStories = res})
+function callAPI() {
+  fetch("api", { headers : {
+    'Content-Type' : 'applications/json',
+    'Accept': 'application/json'}
+  })
+  .then(res => res.json())
+  .then(data => console.log(data) )
 }
 
   useEffect(() => {
@@ -25,12 +27,12 @@ callAPI() {
       </header>
       <div>
         <ul>
-          {stories.trendingStories.map((story) => (
+          {/* {stories.trendingStories.map((story) => (
             <div>
               <li key={story.id}></li>
               <a>{story.name}</a>
             </div>
-          ))}
+          ))} */}
         </ul>
         <div className="container">
           <p>
