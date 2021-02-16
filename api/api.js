@@ -1,13 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
-const app = express();
+const router = express().Router();
 const Twit = require('twit')
 
 // middleware
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(express.static(path.join(__dirname, "client")));
+router.use(passport.initialize());
+router.use(passport.session());
+router.use(express.static(path.join(__dirname, "client")));
 // env variable
 
 const T = new Twit({
@@ -26,9 +26,9 @@ const chicago = [-87.941313, 41.643179, -87.522772, 42.023758]
 const params = {
   'user.fields': 'retweet_count:max_position,favorte_count,lang:en' // Edit optional query parameters here
 }
+console.log('calling api file')
 
-
-app.get('/', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     T.get('search/tweets', {q: `${params}`, count: 1}, function(
       err,
@@ -36,6 +36,7 @@ app.get('/', async (req, res, next) => {
       response
     ) {
       try {
+        console.log('hitting ROUTE!!!')
         //   console.log('current tweets',data.statuses[0])
         //  const twitterId = data.statuses[0].id;
         //  const twitterRtCount = data.statuses[0].retweet_count;
@@ -56,4 +57,4 @@ app.get('/', async (req, res, next) => {
 
 
 
-// app.listen(process.env.PORT || 80);
+// router.listen(process.env.PORT || 80);

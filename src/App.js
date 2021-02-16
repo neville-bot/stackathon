@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import axios from "axios";
 
-class App extends React() {
-  constructor(props){
-    super(props)
-    this.state = { trendingStories: []}
-  }
-  // const [stories, setStories] = useState({ trendingStories: [] });
-  // useEffect(() => {
-  //   async function fetchData() {
-  //   }
-  //   fetchData();
-  // }, []);
-  componentDidMount(){
+function App() {
+  const [stories, setStories] = useState([])
+  
+function callAPI() {
+  fetch("api", { headers : {
+    'Content-Type' : 'applications/json',
+    'Accept': 'application/json'}
+  })
+  .then(res => res.json())
+  .then(data => console.log(data) )
+}
 
-  }
+  useEffect(() => {
+      callAPI()
+  }, []);
+  
 
-  render(){ stories ? (
+   return (stories)  ? ( 
     <div className="App">
       <header className="App-header">
         <h3>Custom Location</h3>
@@ -26,12 +27,12 @@ class App extends React() {
       </header>
       <div>
         <ul>
-          {stories.trendingStories.map((story) => (
+          {/* {stories.trendingStories.map((story) => (
             <div>
               <li key={story.id}></li>
               <a>{story.name}</a>
             </div>
-          ))}
+          ))} */}
         </ul>
         <div className="container">
           <p>
@@ -89,7 +90,7 @@ class App extends React() {
     </div>
   ) : (
     <div>Error Loading page</div>
-  );}
+  );
 }
 
 export default App;
