@@ -2,23 +2,33 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
-  const [stories, setStories] = useState([])
-  
-function callAPI() {
-  fetch("api", { headers : {
-    'Content-Type' : 'applications/json',
-    'Accept': 'application/json'}
-  })
-  .then(res => res.json())
-  .then(data => console.log(data) )
-}
+  const [stories, setStories] = useState([]);
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  function callAPI() {
+    fetch("api", {
+      headers: {
+        "Content-Type": "applications/json",
+        Accept: "application/json",
+      },
+    })
+      .then((res) => res.json(), setIsLoaded(true))
+      .then(
+        (data) => setStories(data),
+        console.log(stories),
+
+        (error) => {
+          setIsLoaded(true);
+          setError(error);
+        }
+      );
+  }
 
   useEffect(() => {
-      callAPI()
+    callAPI();
   }, []);
-  
 
-   return (stories)  ? ( 
+  return stories ? (
     <div className="App">
       <header className="App-header">
         <h3>Custom Location</h3>
