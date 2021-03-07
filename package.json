@@ -22,13 +22,13 @@
     "twit": "^2.2.11"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start" : "npm run build && (cd api && npm start)",
+    "start-client": "react-scripts start",
     "start-dev": "NODE_ENV='development' react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test-two": "mocha --require ignore-styles",
-    "eject": "react-scripts eject",
-    "proxy": "http://localhost:8080"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
