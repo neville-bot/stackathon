@@ -7,16 +7,15 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   function callAPI() {
     fetch("api", {
-      headers: {
-        "Content-Type": "applications/json",
-        Accept: "application/json",
-      },
+      // headers: {
+      //   "Content-Type": "applications/json",
+      //   Accept: "application/json",
+      // },
     })
       .then((res) => res.json(), setIsLoaded(true))
       .then(
         (data) => setStories(data),
         console.log("stories", stories),
-
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
         // exceptions from actual bugs in components.
@@ -111,3 +110,9 @@ function App() {
 }
 
 export default App;
+
+// is exporting explicitly for tests a thing?
+
+// exports._test = {
+//   callAPI: callAPI,
+// };
