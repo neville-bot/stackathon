@@ -22,7 +22,7 @@
     "twit": "^2.2.11"
   },
   "scripts": {
-    "start" : "npm run build && (cd api && npm start)",
+    "start": "npm run build && (cd api && npm start)",
     "start-client": "react-scripts start",
     "start-dev": "NODE_ENV='development' react-scripts start",
     "build": "react-scripts build",
