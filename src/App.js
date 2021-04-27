@@ -6,13 +6,8 @@ function App() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   function callAPI() {
-    fetch("api", {
-      // headers: {
-      //   "Content-Type": "applications/json",
-      //   Accept: "application/json",
-      // },
-    })
-      .then((res) => res.json(), setIsLoaded(true))
+    fetch("api", {})
+      .then(setIsLoaded(true))
       .then(
         (data) => setStories(data),
         console.log("stories", stories),

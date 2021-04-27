@@ -1,14 +1,14 @@
-// var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
+const createError = require("http-errors"); // module to create HTTP errors
+const express = require("express");
+const path = require("path"); // module for file and directory paths
 
-// var cookieParser = require("cookie-parser");
-// var logger = require("morgan");
+const cookieParser = require("cookie-parser"); // module for parsing cookies
+const logger = require("morgan"); //logging middleware
 
-var indexRouter = require("./routes/index");
-var twitterRouter = require("./routes/api");
+const indexRouter = require("./routes/index");
+const twitterRouter = require("./routes/api");
 
-var app = express();
+const app = express();
 
 // view engine setup(for jade)
 // app.set("views", path.join(__dirname, "views"));
@@ -16,14 +16,14 @@ var app = express();
 
 // middleware
 
-// app.use(logger("dev"));
+app.use(logger("dev"));
+// commenting json trying to get twitter data through
 // app.use(express.json());
 // app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
+app.use(cookieParser());
 // creating a path for the build folder, creating our react page first
 app.use(express.static(path.join(__dirname, "..", "build")));
 // serving static html file
-
 app.use(express.static(path.join("../public")));
 
 // app.get("/", (req, res) => {
@@ -34,26 +34,26 @@ app.use("/", indexRouter);
 app.use("/api", twitterRouter);
 
 // catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   next(createError(404));
-// });
+app.use(function(req, res, next) {
+  next(createError(404));
+});
 
 // error handler
-// app.use(function(err, req, res, next) {
-//   // set locals, only providing error in development
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get("env") === "development" ? err : {};
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get("env") === "development" ? err : {};
 
-//   // render the error page
-//   res.status(err.status || 500);
-//   // apparenlty render will throw error if your not using a view engine
-//   // res.render("error");
-//   // so instead usind res.json
-//   res.json({
-//     message: err.message,
-//     error: err,
-//   });
-// });
+  // render the error page
+  res.status(err.status || 500);
+  // apparenlty render will throw error if your not using a view engine
+  // res.render("error");
+  // so instead usind res.json
+  res.json({
+    message: err.message,
+    error: err,
+  });
+});
 
 // any route not found on server side, we will send it to the client side route (index.html),
 // which will handle that and display the client-side route page.
