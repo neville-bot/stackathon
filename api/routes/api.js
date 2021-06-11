@@ -1,40 +1,39 @@
 const express = require("express");
 const router = express.Router();
-const dotenv = require("dotenv").config({ path: "../.env" });
 const passport = require("passport");
-const Twit = require("twit");
 
 // // middleware
-// const bodyParser = require("body-parser");
-// const path = require("path");
-// router.use(passport.initialize());
-// router.use(passport.session());
-// router.use(express.static(path.join(__dirname, "client")));
+const bodyParser = require("body-parser");
+const path = require("path");
+router.use(passport.initialize());
+router.use(passport.session());
+router.use(express.static(path.join(__dirname, "client")));
 
-// twit configuration
-const T = new Twit({
-  consumer_key: process.env.consumer_key,
-  consumer_secret: process.env.consumer_secret,
-  access_token: process.env.access_token,
-  access_token_secret: process.env.access_token_secret,
-  timeout_ms: 60 * 1000, //    optional HTTP request timeout to apply to all requests.
-  strictSSL: true, // optional - requires SSL certificates to be valid.
-});
+// let consumerKey = process.env.REACT_APP_CONSUMER_KEY;
+// let consumerSecret = process.env.REACT_APP_CONSUMER_SECRET;
+// let accessToken = process.env.REACT_APP_ACCESS_TOKEN;
+// let accessSecret = process.env.REACT_APP_ACCESS_TOKEN_SECRET;
+console.log("I am RuNiNinggggg");
+
 // // location data stream based on latitude/longitude bounded box(from twit)
 const chicago = [-87.941313, 41.643179, -87.522772, 42.023758];
-// const params = {
-//   "user.fields": "retweet_count,favorte_count,lang:en", // Edit optional query parameters here
-// };
-// T.get("search/tweets", { q: "banana since:2011-07-11", count: 100 }, function(
-//   err,
-//   data,
-//   response
-// ) {
-//   console.log(data);
+const params = {
+  "user.fields": "location:`${chicago}`,favorte_count,lang:en", // Edit optional query parameters here
+};
+// const stream = T.stream("statuses/filter", { locations: chicago });
+let max_position = 10;
+
+// stream.on("tweet", function(tweet) {
+//   console.log(tweet);
 // });
-router.get("/", async (req, res, next) => {
+
+router.get("/", (req, res, next) => {
   try {
-    T.get("search/tweets", { count: 1 }, function(error, data, response) {
+    T.get("search/tweets", { q: `${params}`, count: 1 }, function(
+      error,
+      data,
+      response
+    ) {
       try {
         console.log("current tweets", data);
         // console.log("res data", response);

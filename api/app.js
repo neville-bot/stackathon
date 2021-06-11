@@ -1,3 +1,5 @@
+// const dotenv = require("dotenv");
+// dotenv.config({ path: "../.env" });
 const createError = require("http-errors"); // module to create HTTP errors
 const express = require("express");
 const path = require("path"); // module for file and directory paths
@@ -5,21 +7,16 @@ const path = require("path"); // module for file and directory paths
 const cookieParser = require("cookie-parser"); // module for parsing cookies
 const logger = require("morgan"); //logging middleware
 
-const indexRouter = require("./routes/index");
-const twitterRouter = require("./routes/api");
+const indexRouter = require("./routes/index"); //home route
+const twitterRouter = require("./routes/api"); //twitter API route
 
 const app = express();
-
-// view engine setup(for jade)
-// app.set("views", path.join(__dirname, "views"));
-// app.set("view engine", "jade");
 
 // middleware
 
 app.use(logger("dev"));
-// commenting json trying to get twitter data through
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
+app.use(express.json()); // parses incoming request with JSON payloads (based on body-parser)
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // creating a path for the build folder, creating our react page first
 app.use(express.static(path.join(__dirname, "..", "build")));
