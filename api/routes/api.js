@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
+const Twit = require("../config/twit").Twit;
+const T = Twit();
 
 // // middleware
 const bodyParser = require("body-parser");
@@ -9,10 +11,6 @@ router.use(passport.initialize());
 router.use(passport.session());
 router.use(express.static(path.join(__dirname, "client")));
 
-// let consumerKey = process.env.REACT_APP_CONSUMER_KEY;
-// let consumerSecret = process.env.REACT_APP_CONSUMER_SECRET;
-// let accessToken = process.env.REACT_APP_ACCESS_TOKEN;
-// let accessSecret = process.env.REACT_APP_ACCESS_TOKEN_SECRET;
 console.log("I am RuNiNinggggg");
 
 // // location data stream based on latitude/longitude bounded box(from twit)
@@ -21,12 +19,17 @@ const params = {
   "user.fields": "location:`${chicago}`,favorte_count,lang:en", // Edit optional query parameters here
 };
 // const stream = T.stream("statuses/filter", { locations: chicago });
-let max_position = 10;
-
 // stream.on("tweet", function(tweet) {
 //   console.log(tweet);
 // });
+T.get(
+  "search/tweets",
+  { q: `${params}`, count: 1 },
 
+  function(error, data, response) {
+    console.log("current tweets", data);
+  }
+);
 router.get("/", (req, res, next) => {
   try {
     T.get("search/tweets", { q: `${params}`, count: 1 }, function(
@@ -50,10 +53,5 @@ router.get("/", (req, res, next) => {
     next(err);
   }
 });
-
-/* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.send('respond with a resource');
-// });
 
 module.exports = router;
