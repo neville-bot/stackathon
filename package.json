@@ -24,7 +24,6 @@
   "scripts": {
     "start": "concurrently \"cd api && npm start\" \"npm run start-client\"",
     "start-client": "react-scripts start",
-    "start-dev": "NODE_ENV='development' npm run start-client && npm run start-server",
     "start-server": "NODE_ENV='development' cd api && npm start",
     "build": "react-scripts build",
     "build-client-watch": "webpack -w",
