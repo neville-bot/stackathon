@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import dataFetch from "./utils.js";
 import "./App.css";
+import parseTweet from "./utils";
 import { Fragment } from "react";
 
 function App() {
@@ -10,16 +10,15 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      let headers = new Headers();
       setError(false);
       setIsLoaded(true);
       try {
-        let result = await fetch("http://localhost:5000/");
-        // .then((res) => res.text())
-        // // .then((res) => res.json())
-        // .then((data) => this.setStories([data]))
+        await fetch("http://localhost:5000/")
+          .then((res) => res.text())
+          .then((res) => parseTweet(res))
+          .then((tweets) => setStories(tweets));
         // .then((data) => console.log("fetch data", data));
-        setStories(result);
+        // setStories(result);
         console.log("stories", stories);
       } catch (error) {
         setError(true);
@@ -41,24 +40,16 @@ function App() {
             <h3>Current Location</h3>
           </header>
           <div>
-            <ul>
-              {/* {stories.map((story) => (
-                <div>
-                  <li key={story.id}></li>
-                  <a>{story.name}</a>
-                </div>
-              ))} */}
-            </ul>
+            <ul>{/*  */}</ul>
             <div className="tweet-container">
               <article className="tweets">
                 <p>
-                  Lorem ipsum door sit amet, consectetur adipiscing elit.
-                  Integer nec odio. Praesent libero. Sed cursus ante dapibus
-                  diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.
-                  Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed
-                  augue semper porta. Mauris massa. Vestibulum lacinia arcu eget
-                  nulla. Class aptent taciti sociosqu ad litora torquent per
-                  conubia nostra, per inceptos himnaeos.{" "}
+                  {stories.map((story) => (
+                    <div>
+                      <li key={story.id}></li>
+                      <a>{story.body}</a>
+                    </div>
+                  ))}
                 </p>
               </article>
 

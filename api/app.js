@@ -26,23 +26,6 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  // apparenlty render will throw error if your not using a view engine
-  // res.render("error");
-  // so instead usind res.json
-  res.json({
-    message: err.message,
-    error: err,
-  });
-});
-
 // any route not found on server side, we will send it to the client side route (index.html),
 // which will handle that and display the client-side route page.
 
