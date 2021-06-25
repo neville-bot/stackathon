@@ -9,8 +9,8 @@
     "babel-core": "^6.26.3",
     "babel-preset-airbnb": "^5.0.0",
     "babel-preset-react": "^6.24.1",
+    "concurrently": "^6.1.0",
     "core-js": "^3.8.3",
-    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mocha": "^8.3.0",
     "passport": "^0.4.1",
@@ -22,10 +22,12 @@
     "twit": "^2.2.11"
   },
   "scripts": {
-    "start": "npm run build && (cd api && npm start)",
+    "start": "concurrently \"cd api && npm start\" \"npm run start-client\"",
     "start-client": "react-scripts start",
-    "start-dev": "NODE_ENV='development' react-scripts start",
+    "start-server": "NODE_ENV='development' cd api && npm start",
     "build": "react-scripts build",
+    "build-client-watch": "webpack -w",
+    "proxy": "http://localhost:5000",
     "test": "react-scripts test",
     "test-two": "mocha --require ignore-styles",
     "eject": "react-scripts eject"
@@ -49,6 +51,7 @@
     "@babel/core": "^7.12.16",
     "@babel/preset-env": "^7.12.16",
     "@babel/register": "^7.12.13",
-    "ignore-styles": "^5.0.1"
+    "ignore-styles": "^5.0.1",
+    "webpack-cli": "^4.7.0"
   }
 }
