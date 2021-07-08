@@ -1,7 +1,36 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import parseTweet from "./utils";
+// import parseTweet from "./utils";
 import { Fragment } from "react";
+
+function parseTweet(tweets) {
+  // tweets are an array of objects, every object is under
+  // data. statuses, which is the array we receive
+  let finalTweets = [];
+  for (let i = 0; i < tweets.length; i++) {
+    console.log("tweets", tweets[0]);
+    let id = tweets.id;
+    let body = tweets.text;
+    let user = tweets.User.name;
+    let handle = tweets.User.screen_name;
+    let date = tweets.User.created_at;
+    let img = tweets.User.profile_background_image_url;
+    let retweetCount = tweets.retweet_count;
+    let favoriteCount = tweets.favorite_count;
+    finalTweets.push({
+      id: id,
+      body: body,
+      user: user,
+      handle: handle,
+      date: date,
+      img: img,
+      retweetCount: retweetCount,
+      favoriteCount: favoriteCount,
+    });
+  }
+  console.log("tweets after parsing", finalTweets);
+  return finalTweets;
+}
 
 function App() {
   const [stories, setStories] = useState([]);
@@ -14,14 +43,15 @@ function App() {
       setIsLoaded(true);
       try {
         await fetch("http://localhost:5000/")
-          .then((res) => res.text())
-          .then((res) => parseTweet(res))
-          .then((tweets) => setStories(tweets));
+          .then((res) => res.json())
+          .then((data) => console.log("front end data", data));
+        // .then((tweets) => setStories(tweets));
         // .then((data) => console.log("fetch data", data));
         // setStories(result);
         console.log("stories", stories);
       } catch (error) {
         setError(true);
+        console.error(error);
       }
       setIsLoaded(false);
     };

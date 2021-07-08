@@ -14,30 +14,29 @@ const T = Twit();
 // // location data stream based on latitude/longitude bounded box(from twit)
 const chicago = [-87.941313, 41.643179, -87.522772, 42.023758];
 const params = {
-  "user.fields": "location:`${chicago}`,favorte_count,lang:en", // Edit optional query parameters here
+  "user.fields": `location: ${chicago},favorte_count,lang:en`, // Edit optional query parameters here
 };
+//parameters example from twitter
+// const params = {
+//   'query': 'from:twitterdev -is:retweet',
+//   'tweet.fields': 'author_id'
+// }
+//stream example
 // const stream = T.stream("statuses/filter", { locations: chicago });
 // stream.on("tweet", function(tweet) {
 //   console.log(tweet);
 // });
-// T.get(
-//   "search/tweets",
-//   { q: `${params}`, count: 1 },
 
-//   function(error, data, response) {
-//     console.log(data);
-//   }
-// );
 router.get("/", async (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   try {
-    await T.get("search/tweets", { q: `${params}`, count: 3 }, function(
+    await T.get("search/tweets", { q: `${params}`, count: 1 }, function(
       error,
       data,
       response
     ) {
-      // console.log("data in express server", data.statuses);
-      res.send(data.statuses);
+      console.log("data in express server", data.statuses);
+      res.send(data);
     });
   } catch (error) {
     console.log(error);
