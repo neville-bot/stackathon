@@ -1,7 +1,36 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import parseTweet from "./utils";
+// import parseTweet from "./utils";
 import { Fragment } from "react";
+
+function parseTweet(tweet) {
+  // tweets are an array of objects, every object is under
+  // data. statuses, which is the array we receive
+  const finalTweets = [];
+  const tweets = tweet.statuses;
+  for (let i = 0; i < tweets.length; i++) {
+    const id = tweets[i].id;
+    const body = tweets[i].text;
+    const name = tweets[i].user.name;
+    const handle = tweets[i].user.screen_name;
+    const date = tweets[i].user.created_at;
+    const img = tweets[i].user.profile_image_url_https;
+    const retweetCount = tweets[i].retweet_count;
+    const favoriteCount = tweets[i].favorite_count;
+    finalTweets.push({
+      id: id,
+      body: body,
+      user: name,
+      handle: handle,
+      date: date,
+      img: img,
+      retweetCount: retweetCount,
+      favoriteCount: favoriteCount,
+    });
+  }
+  console.log("tweets after parsing", finalTweets);
+  return finalTweets;
+}
 
 function App() {
   const [stories, setStories] = useState([]);
@@ -14,14 +43,14 @@ function App() {
       setIsLoaded(true);
       try {
         await fetch("http://localhost:5000/")
-          .then((res) => res.text())
-          .then((res) => parseTweet(res))
+          .then((res) => res.json())
+          .then((data) => parseTweet(data))
           .then((tweets) => setStories(tweets));
         // .then((data) => console.log("fetch data", data));
         // setStories(result);
-        console.log("stories", stories);
       } catch (error) {
         setError(true);
+        console.error(error);
       }
       setIsLoaded(false);
     };
@@ -40,18 +69,18 @@ function App() {
             <h3>Current Location</h3>
           </header>
           <div>
-            <ul>{/*  */}</ul>
             <div className="tweet-container">
-              <article className="tweets">
-                <p>
-                  {stories.map((story) => (
-                    <div>
-                      <li key={story.id}></li>
-                      <a>{story.body}</a>
-                    </div>
-                  ))}
-                </p>
-              </article>
+              {stories.map((story) => (
+                <article className="tweets" key={story.id}>
+                  <img src={story.img} alt="twitter picture" />
+                  <h2>{story.handle}</h2>
+                  <h3>{story.user}</h3>
+                  <p>{story.date}</p>
+                  <p>{story.body}</p>
+                  <span>{story.favoriteCount}</span>
+                  <span>{story.retweetCount}</span>
+                </article>
+              ))}
 
               <article className="tweets">
                 <p>
