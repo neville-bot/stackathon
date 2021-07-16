@@ -1,5 +1,8 @@
+/* config css */
+
 * {
   box-sizing: border-box;
+  /* twitter dark mode */
   background-color: #14171a;
   font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
 }

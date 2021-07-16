@@ -30,12 +30,11 @@ const params = {
 router.get("/", async (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   try {
-    await T.get("search/tweets", { q: `${params}`, count: 1 }, function(
+    await T.get("search/tweets", { q: `${params}`, count: 10 }, function(
       error,
       data,
       response
     ) {
-      console.log("data in express server", data.statuses);
       res.send(data);
     });
   } catch (error) {
