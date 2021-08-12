@@ -1,20 +1,25 @@
-function parseTweet(tweets) {
+export default function parseTweet(tweet) {
   // tweets are an array of objects, every object is under
   // data. statuses, which is the array we receive
-  let finalTweets = [];
+  const finalTweets = [];
+  const tweets = tweet.statuses;
+  console.log("before parsing", tweets);
+
   for (let i = 0; i < tweets.length; i++) {
-    let id = tweets.id;
-    let body = tweets.text;
-    let user = tweets.user.name;
-    let handle = tweets.user.screen_name;
-    let date = tweets.user.created_at;
-    let img = tweets.user.profile_background_image_url;
-    let retweetCount = tweets.retweet_count;
-    let favoriteCount = tweets.favorite_count;
+    const id = tweets[i].id;
+    const body = tweets[i].text;
+    const name = tweets[i].user.name;
+    const handle = tweets[i].user.screen_name;
+    const date = millisToMinutesAndSeconds(
+      Date.now() - Date.parse(tweets[i].created_at)
+    );
+    const img = tweets[i].user.profile_image_url_https;
+    const retweetCount = tweets[i].retweet_count;
+    const favoriteCount = tweets[i].favorite_count;
     finalTweets.push({
       id: id,
       body: body,
-      user: user,
+      user: name,
       handle: handle,
       date: date,
       img: img,
@@ -22,8 +27,23 @@ function parseTweet(tweets) {
       favoriteCount: favoriteCount,
     });
   }
-  console.log("tweets after parsing", finalTweets);
   return finalTweets;
 }
 
-export default parseTweet;
+function millisToMinutesAndSeconds(millis) {
+  const hours = Math.floor(millis / 3600000);
+  const minutes = Math.floor(millis / 60000);
+  const seconds = ((millis % 60000) / 1000).toFixed(0);
+  // if there is less than 60 seconds, we post seconds
+  if (seconds < 60) {
+    return seconds + "s";
+  }
+  // if there is less than 60 minutes, we want to post the minutes
+  else if (minutes < 60) {
+    return minutes + "m";
+  }
+  // else we want to post the hours
+  else {
+    return hours + "h";
+  }
+}

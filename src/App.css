@@ -4,96 +4,98 @@ twitter border grey: #aab8c2
 twitter hover grey: #657786
 */
 
-.App {
-  text-align: center;
+.main {
+  display: grid;
+  grid-template-columns: 1fr 40px 2fr;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
+.header {
   min-height: 10vh;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  text-align: center;
+
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.tweet-feed {
+  padding-left: 20%;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#tweets:hover {
+  transition-property: background-color, box-shadow;
+  background-color: rgb(255, 255, 255, 0.03);
+  /* var(--dark-grey); */
+  transition-duration: 0.2s;
 }
-
-.tweet-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-article.tweets {
+/* #tweets h3 h2 p :hover {
+  transition-property: none;
+} */
+#tweets {
   /* styling from twitter dev portal */
-  display: inline-block;
-  font-size: 12px;
-  font-weight: bold;
+  display: flex;
+  align-items: flex-start;
+  font-size: 15px;
   line-height: 16px;
-  /* twitter grey */
-  border: solid #aab8c2;
+  border: solid var(--light-grey);
   border-radius: 5px;
   border-width: 1px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); */
   cursor: pointer;
   padding: 0 16px 16px 16px;
-  max-height: 122px;
-  max-width: 568px;
+  height: 100%;
+  width: 568px;
   padding-left: 16px;
   padding-right: 16px;
+  overflow: hidden;
 }
-article.tweets :hover {
-  background-color: #657786;
-}
-article.tweets p {
-  /* original styling */
-  /* margin: 1rem;
-  height: 20%;
-  width: 40%;
-  border-style: solid;
+h3 {
+  font-size: 15px;
   font-weight: bold;
-  border-color: grey; */
+}
+h4 {
+  font-size: 15px;
+}
+/* the elements of a tweet  */
+.avatar {
+  border-radius: 45px;
+  padding: 20px;
+  /* grid-column: col;
+  grid-row: row / span 3; */
+}
+
+.tweet-body {
+  flex: 1;
+  padding: 10px;
+}
+.handle {
+  text-decoration: underline;
+}
+
+.tweet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.user:hover {
+  text-decoration: underline;
+}
+.date {
+  font-weight: var(--light-grey);
+  /* grid-column: col 4;
+  grid-row: row 1; */
+}
+.content {
+  /* grid-column: col 2 / span 3;
+  grid-row: row 2; */
   /* styling from twitter dev portal */
   font-size: 16px;
   color: white;
   font-weight: 500;
   line-height: 20px;
 }
-
-article.tweets a {
-  /* for future clickable handles */
-  color: inherit;
-  font-weight: normal;
-  text-decoration: none;
-  outline: 0 none;
-}
-
-blockquote.twitter-tweet a:hover,
-blockquote.twitter-tweet a:focus {
-  text-decoration: underline;
+.rt-bar {
+  /* grid-column: col 2 / span 3;
+  grid-row: row 3; */
 }

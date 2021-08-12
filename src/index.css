@@ -1,14 +1,23 @@
 /* config css */
+:root {
+  --dark-mode: #14171a;
+  --twitter-font: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+  --twitter-blue: #1da1f2;
+  --dark-grey: #657786;
+  --light-grey: #aab8c2;
+  --extra-light-grey: #e1e8ed;
+  --extra-extra-light-grey: #f5f8fa;
+}
 
 * {
   box-sizing: border-box;
   /* twitter dark mode */
-  background-color: #14171a;
-  font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+  font-family: var(--twitter-font);
 }
 
 body {
   margin: 0;
+  background-color: var(--dark-mode);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
