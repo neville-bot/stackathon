@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import parseTweet from "./utils";
-
+import Header from "./Header";
+import Tweets from "./Tweets";
 function useFetch(url, opts) {
   const [stories, setStories] = useState([]);
   const [error, setError] = useState(false);
@@ -40,7 +41,7 @@ function App() {
           <Header />
           <div className="tweet-feed">
             {stories.map((tweetObj) => (
-              <Tweets tweet={tweetObj} />
+              <Tweets key={tweetObj.id} tweet={tweetObj} />
             ))}
           </div>
         </div>

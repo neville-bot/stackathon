@@ -15,7 +15,6 @@ twitter hover grey: #657786
   flex-direction: column;
   align-items: center;
   text-align: center;
-
   font-size: calc(10px + 2vmin);
   color: white;
 }
@@ -26,25 +25,20 @@ twitter hover grey: #657786
 #tweets:hover {
   transition-property: background-color, box-shadow;
   background-color: rgb(255, 255, 255, 0.03);
-  /* var(--dark-grey); */
   transition-duration: 0.2s;
 }
-/* #tweets h3 h2 p :hover {
-  transition-property: none;
-} */
+
 #tweets {
   /* styling from twitter dev portal */
   display: flex;
   align-items: flex-start;
   font-size: 15px;
   line-height: 16px;
-  border: solid var(--light-grey);
-  border-radius: 5px;
+  border: 0 solid var(--extra-light-grey);
   border-width: 1px;
   /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); */
   cursor: pointer;
   padding: 0 16px 16px 16px;
-  height: 100%;
   width: 568px;
   padding-left: 16px;
   padding-right: 16px;
@@ -52,10 +46,12 @@ twitter hover grey: #657786
 }
 h3 {
   font-size: 15px;
+  color: var(--extra-extra-light-grey);
   font-weight: bold;
 }
 h4 {
   font-size: 15px;
+  color: var(--light-grey);
 }
 /* the elements of a tweet  */
 .avatar {
@@ -69,33 +65,32 @@ h4 {
   flex: 1;
   padding: 10px;
 }
-.handle {
+.user:hover {
   text-decoration: underline;
 }
 
 .tweet-header {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
 }
+.tweet-header > * {
+  margin: 5px;
+}
+
 .user:hover {
   text-decoration: underline;
 }
 .date {
   font-weight: var(--light-grey);
-  /* grid-column: col 4;
-  grid-row: row 1; */
 }
 .content {
-  /* grid-column: col 2 / span 3;
-  grid-row: row 2; */
   /* styling from twitter dev portal */
   font-size: 16px;
   color: white;
   font-weight: 500;
   line-height: 20px;
 }
-.rt-bar {
-  /* grid-column: col 2 / span 3;
-  grid-row: row 3; */
-}
+/* .rt-bar {
+   grid-column: col 2 / span 3;
+  grid-row: row 3; 
+} */
