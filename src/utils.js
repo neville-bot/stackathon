@@ -3,12 +3,12 @@ export default function parseTweet(tweet) {
   // data. statuses, which is the array we receive
   const finalTweets = [];
   const tweets = tweet.statuses;
-  console.log("before parsing", tweets);
+  console.log("before parsing", tweets[0].text);
 
   for (let i = 0; i < tweets.length; i++) {
     const id = tweets[i].id;
     const body = tweets[i].text;
-    const name = tweets[i].user.name;
+    const user = tweets[i].user.name;
     const handle = tweets[i].user.screen_name;
     const date = millisToMinutesAndSeconds(
       Date.now() - Date.parse(tweets[i].created_at)
@@ -19,7 +19,7 @@ export default function parseTweet(tweet) {
     finalTweets.push({
       id: id,
       body: body,
-      user: name,
+      user: user,
       handle: handle,
       date: date,
       img: img,

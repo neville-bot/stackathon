@@ -3,7 +3,7 @@ import "./App.css";
 function Tweets(props) {
   const {
     id,
-    image,
+    img,
     user,
     handle,
     date,
@@ -14,7 +14,7 @@ function Tweets(props) {
   return (
     <>
       <article id="tweets" key={id}>
-        <img className="avatar" src={image} alt="twitter picture" />
+        <img className="avatar" src={img} alt="twitter profile" />
         <div className="tweet-body">
           <header className="tweet-header">
             <h3 className="user">{user}</h3>
