@@ -1,4 +1,31 @@
-export default function parseTweet(tweet) {
+import { useState, useEffect } from "react";
+
+export default function useFetch(url, opts) {
+  const [stories, setStories] = useState([]);
+  const [error, setError] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  useEffect(() => {
+    setError(false);
+    setIsLoaded(true);
+    const fetchTweets = async () => {
+      try {
+        await fetch(url, opts)
+          .then((res) => res.json())
+          .then((rawTweets) => parseTweet(rawTweets))
+          .then((tweets) => setStories(tweets));
+      } catch (error) {
+        setError(true);
+        setIsLoaded(false);
+        console.error(error);
+      }
+      setIsLoaded(false);
+    };
+    fetchTweets();
+  }, [url]);
+  return [stories, error, isLoaded];
+}
+
+function parseTweet(tweet) {
   // tweets are an array of objects, every object is under
   // data. statuses, which is the array we receive
   const finalTweets = [];
