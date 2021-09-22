@@ -1,9 +1,6 @@
 const Twit = require("twit");
 require("dotenv").config({ path: "../.env" });
-let consumerKey = process.env.REACT_APP_CONSUMER_KEY;
-let consumerSecret = process.env.REACT_APP_CONSUMER_SECRET;
-let accessToken = process.env.REACT_APP_ACCESS_TOKEN;
-let accessSecret = process.env.REACT_APP_ACCESS_TOKEN_SECRET;
+
 // twit configuration
 const T = new Twit({
   consumer_key: process.env.REACT_APP_CONSUMER_KEY,
