@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
+    "@testing-library/react": "^12.1.1",
     "@testing-library/user-event": "^7.2.1",
     "babel-core": "^6.26.3",
     "babel-preset-airbnb": "^5.0.0",
@@ -12,8 +12,8 @@
     "concurrently": "^6.1.0",
     "core-js": "^3.8.3",
     "express": "^4.17.1",
+    "jest-environment-jsdom-sixteen": "^2.0.0",
     "mocha": "^8.3.0",
-    "passport": "^0.4.1",
     "passport-http-bearer": "^1.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -28,7 +28,7 @@
     "build": "react-scripts build",
     "build-client-watch": "webpack -w",
     "proxy": "http://localhost:5000",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
     "test-two": "mocha --require ignore-styles",
     "eject": "react-scripts eject"
   },
@@ -52,6 +52,7 @@
     "@babel/preset-env": "^7.12.16",
     "@babel/register": "^7.12.13",
     "ignore-styles": "^5.0.1",
+    "jest-fetch-mock": "^3.0.3",
     "webpack-cli": "^4.7.0"
   }
 }
