@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 export default function useFetch(url, opts) {
   const [stories, setStories] = useState([]);
   const [error, setError] = useState(false);
@@ -20,7 +19,12 @@ export default function useFetch(url, opts) {
       }
       setIsLoaded(false);
     };
-    fetchTweets();
+    if (process.env.NODE_ENV === "test") {
+      setIsLoaded(false);
+    }
+    if (process.env.NODE_ENV === "development") {
+      fetchTweets();
+    }
   }, [url]);
   return [stories, error, isLoaded];
 }
@@ -30,8 +34,6 @@ function parseTweet(tweet) {
   // data. statuses, which is the array we receive
   const finalTweets = [];
   const tweets = tweet.statuses;
-  console.log("before parsing", tweets[0].text);
-
   for (let i = 0; i < tweets.length; i++) {
     const id = tweets[i].id;
     const body = tweets[i].text;

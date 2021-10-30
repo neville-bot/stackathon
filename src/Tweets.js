@@ -21,7 +21,6 @@ function Tweets(props) {
             <h4 className="handle">@{handle}</h4>
             <p className="date">{date}</p>
           </header>
-
           <p className="content">{body}</p>
           <footer className="rt-bar">
             <span>{favoriteCount}</span>
