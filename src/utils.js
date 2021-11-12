@@ -69,10 +69,10 @@ function millisToMinutesAndSeconds(millis) {
   }
   // if there is less than 60 minutes, we want to post the minutes
   else if (minutes < 60) {
-    return minutes + "m";
+    return minutes + "M";
   }
   // else we want to post the hours
   else {
-    return hours + "h";
+    return hours + "H";
   }
 }

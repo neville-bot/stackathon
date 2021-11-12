@@ -1,0 +1,11 @@
+.sidebar-content {
+  display: flex;
+  flex-direction: row;
+  text-decoration: none;
+  margin: 10px;
+  align-items: center;
+}
+
+.sidebar-content > h2 {
+  padding-left: 10px;
+}

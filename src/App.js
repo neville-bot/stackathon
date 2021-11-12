@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import useFetch from "./utils";
-import Header from "./Header";
+import Header from "./Sidebar";
 import Tweets from "./Tweets";
 
 function App() {

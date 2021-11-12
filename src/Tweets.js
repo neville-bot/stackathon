@@ -1,5 +1,8 @@
 import React from "react";
-import "./App.css";
+import "./Tweets.css";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import ReplyIcon from "@material-ui/icons/Reply";
+import RepeatIcon from "@material-ui/icons/Repeat";
 function Tweets(props) {
   const {
     id,
@@ -13,20 +16,38 @@ function Tweets(props) {
   } = props.tweet;
   return (
     <>
-      <article id="tweets" key={id}>
-        <img className="avatar" src={img} alt="twitter profile" />
-        <div className="tweet-body">
-          <header className="tweet-header">
+      <article id="tweet" key={id}>
+        <img className="tweet-avatar" src={img} alt="twitter profile" />
+        <section className="tweet-body">
+          <header className="tweet-body--header">
             <h3 className="user">{user}</h3>
             <h4 className="handle">@{handle}</h4>
-            <p className="date">{date}</p>
+            <time className="date">{date}</time>
           </header>
-          <p className="content">{body}</p>
-          <footer className="rt-bar">
-            <span>{favoriteCount}</span>
-            <span>{retweetCount}</span>
+          <p className="tweet-content">{body}</p>
+          <footer className="tweet-rtBar">
+            <span>
+              <i className="material-icons">
+                {" "}
+                <ReplyIcon />{" "}
+              </i>
+            </span>
+            <span>
+              <i className="material-icons">
+                {" "}
+                <RepeatIcon />{" "}
+              </i>
+              {retweetCount}
+            </span>
+            <span>
+              <i className="material-icons">
+                {" "}
+                <FavoriteBorderIcon />{" "}
+              </i>
+              {favoriteCount}
+            </span>
           </footer>
-        </div>
+        </section>
       </article>
     </>
   );
