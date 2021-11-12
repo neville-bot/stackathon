@@ -1,0 +1,9 @@
+.sidebar {
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
