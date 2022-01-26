@@ -1,33 +1,29 @@
-// import dependencies
 import React from "react";
-// import component to test
 import App from "./App";
-// import react-testing utilities
+// react-testing utilities
 import { waitFor, screen } from "@testing-library/react";
 // add custom jest matchers from jest-dom
 import "@testing-library/jest-dom/extend-expect";
 import "./utils";
-import ReactDOM, { render, unmountComponentAtNode } from "react-dom";
+import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 
 let container;
-const tweetObj = {
-  id: 123,
-  img: "kitty.svg",
-  user: "john",
-  handle: "dough_boy",
-  date: "12/3/18",
-  body: "Hurry up and buy",
-  favoriteCount: 100000,
-  retweetCount: 3,
-};
+
 // what functionality do I want to test?
 /*
- I want to test that we are fetching the data correctly.
+ I want to test that the data is displaying correctly.
  1) start with smoke test i.e. that app is rendering
- 2) that the app is updating (rendering the twitter data)
- 3)  that fetch formats the data correctly
+ 2) that the app is updating (rendering dummy twitter data)
+ 3) that fetch formats the data correctly (no nulls or undefineds)
  4) if the data is not returned that we return an error
+
+ To do:
+  1) When in test environment, use the mock fetch to return dummy data
+  2) When in test environment, use the mock fetch to return an error
+  3) normal smoke test, app renders correctly.
+  4) formats correctly, i.e. certain children exist and have text in them.
+
 */
 describe("testing fetch API", () => {
   beforeEach(() => {
@@ -35,38 +31,33 @@ describe("testing fetch API", () => {
     act(() => {
       document.body.appendChild(container);
     });
-    // fetch.resetMocks();
   });
   afterEach(() => {
-    // unmountComponentAtNode(container);
     container.remove();
-    // document.body.removeChild(container);
-    container = null;
   });
   // smoke test, testing first render (update screen)
-  it("renders loading screen", () => {
-    // act is jest-fetch-mock boilerplate that wraps components
-    // for state changes
 
+  // test second render (update)
+  it("renders tweets onto document", () => {
+    // await waitFor(() => screen.getByRole("article"));
     act(() => {
-      ReactDOM.render(<App />, container);
+      render(<App />, container);
     });
 
-    expect(
-      screen.getByRole("article", { name: "stories" })
-    ).toBeInTheDocument();
+    expect(screen.getByRole("tweets")).toBeInTheDocument();
   });
 });
-// test second render (update)
-// it("renders json object", () => {
-//   // await waitFor(() => screen.getByRole("article"));
-//   act(() => {
-//     render(<App />, container);
+//   it("renders loading screen", () => {
+//     // act is jest-fetch-mock boilerplate that wraps components
+//     // for state changes
+
+//     act(() => {
+//       render(<App isLoaded={true} />, container);
+//     });
+
+//     expect(screen.getByRole("loader")).toBeInTheDocument();
 //   });
-
-//   expect(screen.getByRole("article")).toHaveTextContent("id");
 // });
-
 // it("useFetch Hook successfully returns data", () => {
 //   fetch.mockResponseOnce(
 //     JSON.stringify({

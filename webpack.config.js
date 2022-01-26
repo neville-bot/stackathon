@@ -10,6 +10,7 @@ module.exports = {
   mode: isDev ? "development" : "production",
   entry: "./src/index.js",
   devtool: "inline-source-map",
+  presets: ["@babel/preset-env", "@babel/preset-react"],
   output: {
     path: path.resolve(buildDirectory),
     filename: "bundle.[fullhash].js",

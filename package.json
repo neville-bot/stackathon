@@ -28,7 +28,7 @@
     "build": "react-scripts build",
     "build-client-watch": "webpack -w",
     "proxy": "http://localhost:5000",
-    "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
+    "test": "react-scripts test",
     "test-two": "mocha --require ignore-styles",
     "eject": "react-scripts eject"
   },
