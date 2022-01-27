@@ -29,7 +29,7 @@
     "build": "react-scripts build",
     "build-client-watch": "webpack -w",
     "proxy": "http://localhost:5000",
-    "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
+    "test": "react-scripts test",
     "test-two": "mocha --require ignore-styles",
     "eject": "react-scripts eject"
   },
@@ -52,6 +52,8 @@
     "@babel/core": "^7.12.16",
     "@babel/preset-env": "^7.12.16",
     "@babel/register": "^7.12.13",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
     "ignore-styles": "^5.0.1",
     "jest-fetch-mock": "^3.0.3",
     "webpack-cli": "^4.7.0"

@@ -18,11 +18,10 @@ function App() {
       </main>
     );
   }
-
   return (
     <main id="main">
       <Header />
-      <article className="tweet-feed" name="tweets">
+      <article className="tweet-feed" role="tweets">
         {stories.map((tweetObj) => (
           <Tweets key={tweetObj.id} tweet={tweetObj} />
         ))}

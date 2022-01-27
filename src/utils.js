@@ -1,4 +1,26 @@
 import { useState, useEffect } from "react";
+const dummyTweet = [
+  {
+    id: 123,
+    img: "kitty.svg",
+    user: "john",
+    handle: "dough_boy",
+    date: "12/3/18",
+    body: "Hurry up and buy",
+    favoriteCount: 100000,
+    retweetCount: 3,
+  },
+  {
+    id: 124,
+    img: "dog.svg",
+    user: "Jose",
+    handle: "diddley_girl",
+    date: "12/3/19",
+    body: "I like to count coconuts",
+    favoriteCount: 5000,
+    retweetCount: 3000,
+  },
+];
 export default function useFetch(url, opts) {
   const [stories, setStories] = useState([]);
   const [error, setError] = useState(false);
@@ -21,6 +43,7 @@ export default function useFetch(url, opts) {
     };
     if (process.env.NODE_ENV === "test") {
       setIsLoaded(false);
+      setStories(dummyTweet);
     }
     if (process.env.NODE_ENV === "development") {
       fetchTweets();
