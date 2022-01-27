@@ -1,13 +1,16 @@
 import React from "react";
 import App from "./App";
+import { useFetch } from "./utils";
 // react-testing utilities
 import { waitFor, screen } from "@testing-library/react";
+import { mount } from "enzyme";
 // add custom jest matchers from jest-dom
 import "@testing-library/jest-dom/extend-expect";
 import "./utils";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
-
+// import Adapter from "enzyme-adapter-react-15";
+// Enzyme.configure({ adapter: new Adapter() });
 let container;
 
 // what functionality do I want to test?
@@ -25,6 +28,12 @@ let container;
   4) formats correctly, i.e. certain children exist and have text in them.
 
 */
+// jest.mock("./utils", () => {
+//   return {
+//     useFetch: jest.fn(() => {}),
+//   };
+// });
+
 describe("testing fetch API", () => {
   beforeEach(() => {
     container = document.createElement("div");
@@ -34,43 +43,37 @@ describe("testing fetch API", () => {
   });
   afterEach(() => {
     container.remove();
+    jest.clearAllMocks();
   });
   // smoke test, testing first render (update screen)
 
   // test second render (update)
   it("renders tweets onto document", () => {
-    // await waitFor(() => screen.getByRole("article"));
     act(() => {
       render(<App />, container);
     });
 
     expect(screen.getByRole("tweets")).toBeInTheDocument();
   });
+  // it("renders loading screen", () => {
+  /*
+      We want to render (or mount), check that the screen is loading. Wait for the data to load, and then check that the screen
+      correctly renders the data.
+    */
+  // act(() => {
+  //   render(<App isLoaded={true} />, container);
+  // });
+  //     const wrapper = mount(<App />);
+  //     expect(wrapper.find("h1").text()).toBe("Loading...");
+  //     // wait for the data to load
+  //     waitFor(() => {
+  //       wrapper.update();
+  //       expect(wrapper.find("tweets").text()).toBe("dough_boy");
+  //     });
+  //   });
+  // });
+
+  it("returns an an error when there is an exception", () => {
+    act(() => {});
+  });
 });
-//   it("renders loading screen", () => {
-//     // act is jest-fetch-mock boilerplate that wraps components
-//     // for state changes
-
-//     act(() => {
-//       render(<App isLoaded={true} />, container);
-//     });
-
-//     expect(screen.getByRole("loader")).toBeInTheDocument();
-//   });
-// });
-// it("useFetch Hook successfully returns data", () => {
-//   fetch.mockResponseOnce(
-//     JSON.stringify({
-//       result: [{ id: 123, img: "image", user: "Mary" }],
-//     })
-//   );
-//   useFetch("http://localhost:5000/").then((res) =>
-//     expect(res.result).toEqual([{ id: 123, img: "image", user: "Mary" }])
-//   );
-
-//   expect(fetch.mockResponseOnce.calls.length).toEqual(1);
-// });
-
-// it("useFetch Hook sets sets is loading to true while running");
-
-// it("returns an an error when there is an exception")
