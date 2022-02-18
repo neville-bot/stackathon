@@ -4,7 +4,7 @@ export default function SidebarElement({ text, Icon }) {
   return (
     <li className="sidebar-content">
       <Icon />
-      <h2>{text}</h2>
+      <h2 id="sidebar-content--headers">{text}</h2>
     </li>
   );
 }

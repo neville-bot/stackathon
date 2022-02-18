@@ -11,7 +11,12 @@ export default function Sidebar() {
   return (
     <nav className="sidebar">
       <ul>
-        <img height="40px" width="40px" src="../public/twitterIconBlue.png" />
+        <img
+          height="40px"
+          width="40px"
+          src="/twitterIconBlue.svg"
+          alt="Twitter"
+        />
         <SidebarElement text={"Home"} Icon={Home} />
         <SidebarElement text={"Trending"} Icon={TrendingUpIcon} />
         <SidebarElement text={"Lists"} Icon={ListAltIcon} />

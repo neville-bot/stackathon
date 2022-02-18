@@ -6,7 +6,7 @@ const logger = require("morgan"); //logging middleware
 const twitterRouter = require("./routes/api"); //twitter API route
 const testAPIRouter = require("./routes/testAPI"); //twitter API route
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 // middleware
 app.use(logger("dev"));
@@ -22,7 +22,7 @@ app.use("/", twitterRouter);
 app.use("/testAPI", testAPIRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
