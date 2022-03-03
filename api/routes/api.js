@@ -5,7 +5,6 @@ const T = Twit();
 
 // // middleware
 // const bodyParser = require("body-parser");
-// const path = require("path");
 // router.use(passport.initialize());
 // router.use(passport.session());
 // router.use(express.static(path.join(__dirname, "client")));
@@ -19,13 +18,13 @@ const params = {
 router.get("/", async (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   try {
-    await T.get("search/tweets", { q: `${params}`, count: 10 }, function(
-      error,
-      data,
-      response
-    ) {
-      res.send(data);
-    });
+    await T.get(
+      "search/tweets",
+      { q: `${params}`, count: 10 },
+      function (error, data, response) {
+        res.send(data);
+      }
+    );
   } catch (error) {
     console.log(error);
   }
